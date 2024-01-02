@@ -1,5 +1,5 @@
 # COQ Runner
-This is **COQ Runner** that is a based in the Dino game originally developed by Google.<br/> 
+This is **COQ Runner** that is based in the Dino game originally developed by Google.<br/> 
 
 In this game the player guides a pixelated Coqsaurus rex across a side-scrolling landscape, avoiding obstacles to achieve a higher score.<br/> 
 
