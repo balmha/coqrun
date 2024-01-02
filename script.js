@@ -1,6 +1,6 @@
 import { updateGround, setupGround } from "./ground.js"
 import { updateclouds, setupclouds } from "./clouds.js"
-import { updateDino, setupDino, getDinoRect, setDinoLose } from "./dino.js"
+import { updateCock, setupCock, getCockRect, setCockLose } from "./cock.js"
 import { updateCactus, setupCactus, getCactusRects } from "./cactus.js"
 
 const WORLD_WIDTH = 100
@@ -30,7 +30,7 @@ function update(time) {
 
   updateclouds(delta, speedScale)
   updateGround(delta, speedScale)
-  updateDino(delta, speedScale)
+  updateCock(delta, speedScale)
   updateCactus(delta, speedScale)
   updateSpeedScale(delta)
   updateScore(delta)
@@ -41,8 +41,8 @@ function update(time) {
 }
 
 function checkLose() {
-  const dinoRect = getDinoRect()
-  return getCactusRects().some(rect => isCollision(rect, dinoRect))
+  const cockRect = getCockRect()
+  return getCactusRects().some(rect => isCollision(rect, cockRect))
 }
 
 
@@ -72,14 +72,14 @@ function handleStart() {
   Highscore = 1000
   setupclouds()
   setupGround()
-  setupDino()
+  setupCock()
   setupCactus()
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
 }
 
 function handleLose() {
-  setDinoLose()
+  setCockLose()
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true })
     startScreenElem.classList.remove("hide")
