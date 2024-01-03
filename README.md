@@ -6,7 +6,7 @@ In this game the player guides a pixelated Coqsaurus rex across a side-scrolling
 **Genres:** Endless runner, Browser game<br/>
 **Platform:** Web browser<br/>
 
-<!-- ![Dino-Game-Clone-Abinandh-MJ](https://user-images.githubusercontent.com/99226172/226126302-0f1cb56a-6f9a-48c1-b6c8-6bb530778c13.png) -->
+![Coqsaurus](https://github.com/balmha/coqrun/assets/29252903/b6683678-a2f2-48cf-83ce-c9bcca460038)
 
 # Developer Notes <br/>
 - Press the Spacebar to begin the game.The coqsaurus will start running automatically.<br/>
