@@ -40,8 +40,8 @@
     right: 7vmin;
     top: 1vmin;
   }
-  
-  .start-screen {
+
+  .connect-screen {
     position: absolute;
     font-size: 2vmin;
     color: #535353;
@@ -50,8 +50,13 @@
     transform: translate(-50%, -50%);
   }
   
-  .hide {
-    display: none;
+  .start-screen {
+    position: absolute;
+    font-size: 2vmin;
+    color: #535353;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   
   .ground {
@@ -87,7 +92,122 @@
 
 .logo {
   position: absolute;
-  left: 50%;
+  top: 12%;
+}
+
+.btn {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  width: 250px;
+  padding: 0 25px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
   top: 1%;
-  right: 50%;
+  }
+  
+  .btn:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+  }
+  
+  .btn:hover:after {
+  transform: translate(0, 0);
+  }
+  
+  .btn:active {
+  background-color: #ffdeda;
+  outline: 0;
+  }
+  
+  .btn:hover {
+  outline: 0;
+  }
+  
+  @media (min-width: 768px) {
+  .btn {
+      padding: 0 40px;
+  }
+  }
+
+  /* Popup container - can be anything you want */
+.popup {
+  font-size: 2vmin;
+  color: #535353;
+  position: absolute;
+  display: inline-block;
+  cursor: pointer;
+  top: 10%;
+  left: 30%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.scoretext{
+  position: relative;
+  font-size: 2vmin;
+  color: #535353;
+  top: 0%;
+  left: 40%;
+}
+
+.table{
+  position: relative;
+  font-size: 2vmin;
+  color: #535353;
+  top: 25%;
+  left: 0%;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+table {
+  /* font-family: arial, sans-serif; */
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.hide {
+  display: none;
 }

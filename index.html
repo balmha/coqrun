@@ -5,28 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COQ Runner | Nicolas Balmaceda</title>
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.2.2/web3.min.js"></script>
     <script src="script.js" type="module"></script>
 </head>
-<body>
-    <script type="text/javascript" src="walletconnect.js"></script>
+<body>  
+    <button id="ConnectMet" class="btn"> Connect Wallet </button>
+    <div class="btn" id="ConnectedWallet"><p>Wallet Connected <iconify-icon icon="logos:metamask-icon"></iconify-icon></p></div>
     <img src="images/logo-cock.png" alt="cock-logo" width="100px" class="logo">
-    <input type="button" value="Connect Wallet" onclick="connect();">
     <div class="world" data-world>
-        <div class="highscore" data-Highscore><span class="high">HI</span> 10000 </div>
-        <div class="separator">|</div>
+        <div class="separator">Score |</div>
         <div class="score" data-score>0</div>
+        <div class="connect-screen" data-connect-screen>Connect your wallet to play</div>
         <div class="start-screen" data-start-screen>Press any key to Start</div>
+        <div class="popup hide" data-score-screen><p class="scoretext">Scoreboard</p>
+            <table class="table" id="scoreboard">
+                <tr>
+                  <th>Address</th>
+                  <th>Score</th>
+                </tr>
+                <tbody id="fillBody"></tbody>
+            </table>
+        </div>
         <img src="images/ground.png" class="ground" data-ground>
         <img src="images/ground.png" class="ground" data-ground>
         <img src="images/clouds.png" class="clouds" data-clouds>
         <img src="images/clouds.png" class="clouds" data-clouds>
         <img src="images/cock-stationary.png" class="cock" data-cock>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script type="module" src="./walletconnect.js"></script>
 </body>
 </html>

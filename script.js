@@ -2,6 +2,7 @@ import { updateGround, setupGround } from "./ground.js"
 import { updateclouds, setupclouds } from "./clouds.js"
 import { updateCock, setupCock, getCockRect, setCockLose } from "./cock.js"
 import { updateCactus, setupCactus, getCactusRects } from "./cactus.js"
+import {cleantable, getScore, isConnected} from "./walletconnect.js"
 
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
@@ -10,16 +11,22 @@ const SPEED_SCALE_INCREASE = 0.00001
 const worldElem = document.querySelector("[data-world]")
 const scoreElem = document.querySelector("[data-score]")
 const startScreenElem = document.querySelector("[data-start-screen]")
+const connectScreenElem = document.querySelector("[data-connect-screen]")
+const connectScreenButton = document.getElementById('ConnectMet');
+const connectedScreenButton = document.getElementById('ConnectedWallet');
+const scoreScreenButton = document.querySelector('[data-score-screen]');
 const stopScreenElem = document.querySelector("[data-end-screen]")
+
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
-document.addEventListener("keydown", handleStart, { once: true })
+window.addEventListener("load", handleConnect, { once: true })
 
 let lastTime
 let speedScale
 let score
 let Highscore
+
 function update(time) {
   if (lastTime == null) {
     lastTime = time
@@ -66,6 +73,7 @@ function updateScore(delta) {
 
 
 function handleStart() {
+  cleantable();
   lastTime = null
   speedScale = 1
   score = 0
@@ -74,20 +82,43 @@ function handleStart() {
   setupGround()
   setupCock()
   setupCactus()
+  scoreScreenButton.classList.add("hide");
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
 }
 
-function handleLose() {
-  setCockLose()
-  setTimeout(() => {
-    document.addEventListener("keydown", handleStart, { once: true })
+async function handleConnect() {
+  lastTime = null
+  speedScale = 1
+  score = 0
+  Highscore = 0
+  setupclouds()
+  setupGround()
+  setupCock()
+  setupCactus()
+  if (await isConnected()){
+    connectScreenElem.classList.add("hide")
+    connectScreenButton.classList.add("hide")
     startScreenElem.classList.remove("hide")
-  }, 100)
+    connectedScreenButton.classList.remove("hide")
+    document.addEventListener("keypress", handleStart, { once: true })
+  }
+  else {
+    startScreenElem.classList.add("hide")
+    connectedScreenButton.classList.add("hide")
+    connectScreenElem.classList.remove("hide")
+    connectScreenButton.classList.remove("hide")
+  }
 }
 
-if (score > Highscore) {
-  Highscore = score;
+async function handleLose() {
+  setCockLose()
+  await getScore(score);
+  setTimeout(() => {
+    scoreScreenButton.classList.remove("hide");
+    startScreenElem.classList.remove("hide")
+    document.addEventListener("keydown", handleStart, { once: true })
+  }, 0)
 }
 
 function setPixelToWorldScale() {
