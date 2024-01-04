@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COQ Runner | Nicolas Balmaceda</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +18,7 @@
 <body>  
     <button id="ConnectMet" class="btn"> Connect Wallet </button>
     <div class="btn" id="ConnectedWallet"><p>Wallet Connected <iconify-icon icon="logos:metamask-icon"></iconify-icon></p></div>
-    <img src="images/logo-cock.png" alt="cock-logo" width="100px" class="logo">
+    <img src="images/logo-cock.png" alt="cock-logo" width="150px" class="logo">
     <div class="world" data-world>
         <div class="separator">Score |</div>
         <div class="score" data-score>0</div>
@@ -36,6 +38,19 @@
         <img src="images/clouds.png" class="clouds" data-clouds>
         <img src="images/clouds.png" class="clouds" data-clouds>
         <img src="images/cock-stationary.png" class="cock" data-cock>
+    </div>
+    <div class="social">
+        <div class="flex flex-row justify-center items-center mt-6">
+            <a href="https://discord.gg/Ta8Tzw3ckt" target="_blank">
+                <img class="avax-logo mr-2" src="/images/Discord.png" alt="Discord Logo" style="vertical-align:middle;width:45px;height:auto;margin-top:-8px">
+            </a>&nbsp;
+            <a href="https://twitter.com/CoqInuAvax" target="_blank">
+                <img class="avax-logo ml-2" src="/images/X.png" alt="X Logo" style="vertical-align:middle;width:45px;height:auto;margin-top:-8px">
+            </a>&nbsp;
+            <a href="https://t.co/bwwYCQuCCD" target="_blank">
+                <img class="avax-logo ml-2" src="/images/TG.png" alt="Telegram Logo" style="vertical-align:middle;width:45px;height:auto;margin-top:-8px">
+            </a>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script type="module" src="./walletconnect.js"></script>

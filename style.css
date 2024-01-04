@@ -92,12 +92,49 @@
 
 .logo {
   position: absolute;
-  top: 12%;
+  top: 1%;
+  left: 48%;
+  border: #C92C4B 2px solid;
+  padding: 0.5em;
+  margin: 0 -1em; 
+}
+
+.social {
+  position: absolute;
+  top: 0%;
+  left: 85%;
+}
+
+.avax-logo {
+  width: 26px;
+  height: 26px;
+}
+
+.ml-2 {
+  margin-left: .5rem
+}
+.mr-2 {
+  margin-right: .5rem
+}
+.mt-6 {
+  margin-top: 1.5rem
+}
+.items-center {
+  align-items: center
+}
+.justify-center {
+  justify-content: center
+}
+.flex {
+  display: flex
+}
+.flex-row {
+  flex-direction: row
 }
 
 .btn {
   align-items: center;
-  background-color: #fee6e3;
+  background-color: #C92C4B;
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
@@ -118,6 +155,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   top: 1%;
+  left: 0%;
   }
   
   .btn:after {
@@ -140,7 +178,7 @@
   }
   
   .btn:active {
-  background-color: #ffdeda;
+  background-color: #C92C4B;
   outline: 0;
   }
   
