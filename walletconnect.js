@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, orderBy, limit, getDocs, query, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,15 +18,53 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+//Anonymous authentication
+const auth = getAuth();
+signInAnonymously(auth)
+  .then(() => {
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error("Sign-in failed:", errorMessage);
+  });
+
 const db = getFirestore(app);
+
+// AVALANCHE Connection
+// Avalanche Network information for automatic onboarding in MetaMask
+const AVALANCHE_MAINNET_PARAMS = {
+  chainId: '0xA86A',
+  chainName: 'Avalanche Network C-Chain',
+  nativeCurrency: {
+    name: 'Avalanche',
+    symbol: 'AVAX',
+    decimals: 18
+  },
+  rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+  blockExplorerUrls: ['https://snowtrace.io/']
+};
+
+let globalChainId;
+
+export function IsAvalancheSelected(){
+  if (localStorage.globalChainId == "0xa86a"){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
 
 export async function isConnected() {
   const accounts = await ethereum.request({method: 'eth_accounts'});       
-  if (accounts.length) {
+  if (accounts.length && IsAvalancheSelected()) {
     console.log(`You're connected to: ${accounts[0]}`);
     return true;
-  } else {
-    console.log("Metamask is not connected");
+    }
+  else {
+    console.log("Metamask or Avalanche are not connected", localStorage.globalChainId);
     return false;
   }
 }
@@ -36,12 +76,26 @@ async function connectionMet(){
   }
   // ... continue with initializing Web3
   web3 = new Web3(window.ethereum); // initialize Web3
-  const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-  const account = accounts[0];
+  ethereum.request({ method: "eth_requestAccounts" });
+  ethereum.request({"method": "wallet_switchEthereumChain","params": [{"chainId": "0xA86A"}]})
+    .then(function(result) {localStorage.globalChainId = "0xa86a";})
+    .catch(function(error) {
+      window.ethereum.request({method: 'wallet_addEthereumChain', params: [AVALANCHE_MAINNET_PARAMS]})
+    });
 }
 
 document.getElementById("ConnectMet").addEventListener("click", connectionMet);
+
+window.ethereum.on('connect', (connectInfo) => {
+  localStorage.globalChainId = connectInfo.chainId.toLowerCase();
+})
 //document.querySelector('[data-score-screen]').addEventListener("click", getScore);
+
+window.ethereum.on('chainChanged', (chainId) =>{
+  localStorage.globalChainId = chainId.toLowerCase();
+  console.log(localStorage.globalChainId)
+  window.location.reload();
+});
 
 window.ethereum.on('accountsChanged', function(accounts) {
   window.location.reload()  
@@ -80,4 +134,5 @@ export function cleantable() {
   for (var x=rowCount-1; x>0; x--) {
     myTable.deleteRow(x);
   }
+
 }

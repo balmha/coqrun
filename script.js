@@ -15,7 +15,6 @@ const connectScreenElem = document.querySelector("[data-connect-screen]")
 const connectScreenButton = document.getElementById('ConnectMet');
 const connectedScreenButton = document.getElementById('ConnectedWallet');
 const scoreScreenButton = document.querySelector('[data-score-screen]');
-const stopScreenElem = document.querySelector("[data-end-screen]")
 
 
 setPixelToWorldScale()
@@ -97,8 +96,8 @@ async function handleConnect() {
   setupCock()
   setupCactus()
   if (await isConnected()){
-    connectScreenElem.classList.add("hide")
     connectScreenButton.classList.add("hide")
+    connectScreenElem.classList.add("hide")
     startScreenElem.classList.remove("hide")
     connectedScreenButton.classList.remove("hide")
     document.addEventListener("keypress", handleStart, { once: true })
