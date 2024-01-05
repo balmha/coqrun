@@ -105,6 +105,19 @@
   left: 85%;
 }
 
+.footer {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+}
+
+.footer-screen {
+  position: absolute;
+  font-size: 2vmin;
+  color: #535353;
+  transform: translate(-50%, -50%);
+}
+
 .avax-logo {
   width: 26px;
   height: 26px;

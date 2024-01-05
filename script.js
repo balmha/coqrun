@@ -11,6 +11,7 @@ const SPEED_SCALE_INCREASE = 0.00001
 const worldElem = document.querySelector("[data-world]")
 const scoreElem = document.querySelector("[data-score]")
 const startScreenElem = document.querySelector("[data-start-screen]")
+const jumpScreenElem = document.querySelector("[data-jump-screen]")
 const connectScreenElem = document.querySelector("[data-connect-screen]")
 const connectScreenButton = document.getElementById('ConnectMet');
 const connectedScreenButton = document.getElementById('ConnectedWallet');
@@ -24,7 +25,6 @@ window.addEventListener("load", handleConnect, { once: true })
 let lastTime
 let speedScale
 let score
-let Highscore
 
 function update(time) {
   if (lastTime == null) {
@@ -76,13 +76,13 @@ function handleStart() {
   lastTime = null
   speedScale = 1
   score = 0
-  Highscore = 1000
   setupclouds()
   setupGround()
   setupCock()
   setupCactus()
   scoreScreenButton.classList.add("hide");
-  startScreenElem.classList.add("hide")
+  startScreenElem.classList.add("hide");
+  jumpScreenElem.classList.add("hide");
   window.requestAnimationFrame(update)
 }
 
@@ -90,7 +90,6 @@ async function handleConnect() {
   lastTime = null
   speedScale = 1
   score = 0
-  Highscore = 0
   setupclouds()
   setupGround()
   setupCock()
@@ -100,11 +99,13 @@ async function handleConnect() {
     connectScreenElem.classList.add("hide")
     startScreenElem.classList.remove("hide")
     connectedScreenButton.classList.remove("hide")
+    jumpScreenElem.classList.remove("hide")
     document.addEventListener("keypress", handleStart, { once: true })
   }
   else {
     startScreenElem.classList.add("hide")
     connectedScreenButton.classList.add("hide")
+    jumpScreenElem.classList.add("hide");
     connectScreenElem.classList.remove("hide")
     connectScreenButton.classList.remove("hide")
   }
@@ -115,7 +116,8 @@ async function handleLose() {
   await getScore(score);
   setTimeout(() => {
     scoreScreenButton.classList.remove("hide");
-    startScreenElem.classList.remove("hide")
+    startScreenElem.classList.remove("hide");
+    jumpScreenElem.classList.remove("hide");
     document.addEventListener("keydown", handleStart, { once: true })
   }, 0)
 }
