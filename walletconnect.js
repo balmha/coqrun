@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, orderBy, limit, getDocs, query, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -135,4 +136,18 @@ export function cleantable() {
     myTable.deleteRow(x);
   }
 
+}
+
+export async function sendcoq(address, amount){
+  const parsedAmount = ethers.parseUnits(amount, "ether");
+
+  await ethereum.request({ 
+      method: 'eth_sendTransaction',
+      params: [{
+      from: currentAccount,
+      to: addressTo, 
+      gas: '0x5208',
+      value: '0x' + parsedAmount.toString(16),
+      }]
+  })
 }

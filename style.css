@@ -93,7 +93,7 @@
 .logo {
   position: absolute;
   top: 1%;
-  left: 48%;
+  left: 45%;
   border: #C92C4B 2px solid;
   padding: 0.5em;
   margin: 0 -1em; 
@@ -154,12 +154,13 @@
   color: #111;
   cursor: pointer;
   display: flex;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
+  /* font-family: Inter,sans-serif; */
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
   height: 48px;
   justify-content: center;
   line-height: 24px;
-  width: 250px;
+  width: 210px;
   padding: 0 25px;
   position: absolute;
   text-align: center;
@@ -201,6 +202,66 @@
   
   @media (min-width: 768px) {
   .btn {
+      padding: 0 40px;
+  }
+  }
+
+.btn-send {
+  align-items: center;
+  background-color: #C92C4B;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  width: 210px;
+  padding: 0 25px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  top: 90%;
+  left: 83%;
+  }
+  
+  .btn-send:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+  }
+  
+  .btn-send:hover:after {
+  transform: translate(0, 0);
+  }
+  
+  .btn-send:active {
+  background-color: #C92C4B;
+  outline: 0;
+  }
+  
+  .btn-send:hover {
+  outline: 0;
+  }
+  
+  @media (min-width: 768px) {
+  .btn-send {
       padding: 0 40px;
   }
   }
