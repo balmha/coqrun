@@ -3,6 +3,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, orderBy, limit, getDocs, query, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
+import abi from './coqABI.json' assert { type: "json" };
+const contractABI = abi.abi;
+const coqAddress = "0x420FcA0121DC28039145009570975747295f2329";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -86,6 +89,8 @@ async function connectionMet(){
 }
 
 document.getElementById("ConnectMet").addEventListener("click", connectionMet);
+document.getElementById("SendMet").addEventListener("click", sendCoq);
+document.getElementById("myPopup").addEventListener("click", hiddenSpan);
 
 window.ethereum.on('connect', (connectInfo) => {
   localStorage.globalChainId = connectInfo.chainId.toLowerCase();
@@ -138,16 +143,28 @@ export function cleantable() {
 
 }
 
-export async function sendcoq(address, amount){
+export async function sendCoq(){
+  //console.log(document.getElementById('quantity').value);
+  /* var amount="5000000";
   const parsedAmount = ethers.parseUnits(amount, "ether");
 
-  await ethereum.request({ 
-      method: 'eth_sendTransaction',
-      params: [{
-      from: currentAccount,
-      to: addressTo, 
-      gas: '0x5208',
-      value: '0x' + parsedAmount.toString(16),
-      }]
-  })
+  const tempProvider = await new ethers.BrowserProvider(window.ethereum)
+  const tempSigner = await tempProvider.getSigner();
+  const tempContract = new ethers.Contract(coqAddress, contractABI, tempSigner);
+
+  try {
+    const tx = await tempContract.transfer(
+      '0xF839869e92f536bc00224996f1958EfF127A4d22', // to
+      parsedAmount // balance
+    );
+  } catch (error) {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+    console.log(error)
+  } */
+}
+
+function hiddenSpan(){
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
 }
