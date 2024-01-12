@@ -18,10 +18,13 @@
 </head>
 <body>  
     <button id="ConnectMet" class="btn-c">Connect Wallet</button>
-    <div class="btn-c" id="ConnectedWallet"><p>Wallet Connected<iconify-icon icon="logos:metamask-icon"></iconify-icon></p></div>
+    <div class="btn-c" id="ConnectedWallet"><p>Wallet Connected <iconify-icon icon="logos:metamask-icon"></iconify-icon></p></div>
     <button id="SendMet" class="btn-send" data-toggle="modal" data-target="#sendModal" data-whatever="@mdo"> Send $COQ to a friend </button>
     <div class="pop">
-        <span class="poptext" id="myPopup">Insufficient funds &#x274C;</span>
+        <span class="poptext" id="myPopup">Invalid address or Insufficient funds &#x274C;</span>
+    </div>
+    <div class="pop">
+      <span class="poptext" id="RejectPopup">Transaction Rejected &#x274C;</span>
     </div>
     <img src="images/logo-cock.png" alt="cock-logo" width="150px" class="logo">
     <div class="world" data-world>

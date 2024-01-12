@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, orderBy, limit, getDocs, query, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
+import { ethers, isError } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
 import abi from './coqABI.json' assert { type: "json" };
 const contractABI = abi.abi;
 const coqAddress = "0x420FcA0121DC28039145009570975747295f2329";
@@ -90,6 +90,7 @@ async function connectionMet(){
 
 document.getElementById("ConnectMet").addEventListener("click", connectionMet);
 document.getElementById("myPopup").addEventListener("click", hiddenSpan);
+document.getElementById("RejectPopup").addEventListener("click", hiddenRejected);
 document.getElementById("sendcoqs").addEventListener("submit", sendCoq);
 
 // Here I will work over the popup modal
@@ -156,9 +157,9 @@ export function cleantable() {
 }
 
 export async function sendCoq(event){
-  console.log(document.getElementById('recipient-name').value);
-  console.log(document.getElementById('amount').value);
-  /* var amount="5000000";
+  event.preventDefault();
+  var address=document.getElementById('recipient-name').value;
+  var amount=document.getElementById('amount').value;
   const parsedAmount = ethers.parseUnits(amount, "ether");
 
   const tempProvider = await new ethers.BrowserProvider(window.ethereum)
@@ -167,19 +168,29 @@ export async function sendCoq(event){
 
   try {
     const tx = await tempContract.transfer(
-      '0xF839869e92f536bc00224996f1958EfF127A4d22', // to
+      address, // to
       parsedAmount // balance
-    );
+    ).then(()=>{$('#sendModal').modal('hide')});
+    //0xF839869e92f536bc00224996f1958EfF127A4d22
   } catch (error) {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-    console.log(error)
-  } */
-  $('#sendModal').modal('hide')
-  event.preventDefault();
+    if (isError(error, "ACTION_REJECTED")) {
+      // The Type Guard has validated this object
+      hiddenRejected();
+      console.log(error.data);
+    }
+    else {
+      hiddenSpan();
+      console.log(error.data);
+    }
+  }
 }
 
 function hiddenSpan(){
   var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+
+function hiddenRejected(){
+  var popup = document.getElementById("RejectPopup");
   popup.classList.toggle("show");
 }

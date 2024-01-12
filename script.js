@@ -72,7 +72,7 @@ function updateScore(delta) {
 
 
 function handleStart(event) {
-  if (event.isComposing || event.keyCode === 32 || $('#sendModal').hasClass('show') == true) {
+  if (event.isComposing || (event.keyCode === 32 && $('#sendModal').hasClass('show') == false)) {
     cleantable();
     lastTime = null
     speedScale = 1
@@ -85,6 +85,7 @@ function handleStart(event) {
     startScreenElem.classList.add("hide");
     jumpScreenElem.classList.add("hide");
     window.requestAnimationFrame(update)
+    document.getElementById("SendMet").blur();
   }
   else {
     document.addEventListener("keydown", handleStart, { once: true })
