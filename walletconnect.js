@@ -89,8 +89,20 @@ async function connectionMet(){
 }
 
 document.getElementById("ConnectMet").addEventListener("click", connectionMet);
-document.getElementById("SendMet").addEventListener("click", sendCoq);
 document.getElementById("myPopup").addEventListener("click", hiddenSpan);
+document.getElementById("sendcoqs").addEventListener("submit", sendCoq);
+
+// Here I will work over the popup modal
+$('#sendModal').on('hidden.bs.modal', function (e) {
+  $(this)
+    .find("input,textarea,select")
+       .val('')
+       .end()
+    .find("input[type=checkbox], input[type=radio]")
+       .prop("checked", "")
+       .end();
+})
+//
 
 window.ethereum.on('connect', (connectInfo) => {
   localStorage.globalChainId = connectInfo.chainId.toLowerCase();
@@ -131,7 +143,7 @@ function filltable(address, score) {
   const cell1 = row.insertCell();
   const cell2 = row.insertCell();
   cell1.innerHTML = address;
-  cell2.innerHTML = score;
+  cell2.innerHTML = score;  
 }
 
 export function cleantable() {
@@ -143,8 +155,9 @@ export function cleantable() {
 
 }
 
-export async function sendCoq(){
-  //console.log(document.getElementById('quantity').value);
+export async function sendCoq(event){
+  console.log(document.getElementById('recipient-name').value);
+  console.log(document.getElementById('amount').value);
   /* var amount="5000000";
   const parsedAmount = ethers.parseUnits(amount, "ether");
 
@@ -162,6 +175,8 @@ export async function sendCoq(){
     popup.classList.toggle("show");
     console.log(error)
   } */
+  $('#sendModal').modal('hide')
+  event.preventDefault();
 }
 
 function hiddenSpan(){

@@ -71,19 +71,24 @@ function updateScore(delta) {
 }
 
 
-function handleStart() {
-  cleantable();
-  lastTime = null
-  speedScale = 1
-  score = 0
-  setupclouds()
-  setupGround()
-  setupCock()
-  setupCactus()
-  scoreScreenButton.classList.add("hide");
-  startScreenElem.classList.add("hide");
-  jumpScreenElem.classList.add("hide");
-  window.requestAnimationFrame(update)
+function handleStart(event) {
+  if (event.isComposing || event.keyCode === 32 || $('#sendModal').hasClass('show') == true) {
+    cleantable();
+    lastTime = null
+    speedScale = 1
+    score = 0
+    setupclouds()
+    setupGround()
+    setupCock()
+    setupCactus()
+    scoreScreenButton.classList.add("hide");
+    startScreenElem.classList.add("hide");
+    jumpScreenElem.classList.add("hide");
+    window.requestAnimationFrame(update)
+  }
+  else {
+    document.addEventListener("keydown", handleStart, { once: true })
+  }
 }
 
 async function handleConnect() {
@@ -100,7 +105,7 @@ async function handleConnect() {
     startScreenElem.classList.remove("hide")
     connectedScreenButton.classList.remove("hide")
     jumpScreenElem.classList.remove("hide")
-    document.addEventListener("keypress", handleStart, { once: true })
+    document.addEventListener("keydown", handleStart, { once: true })
   }
   else {
     startScreenElem.classList.add("hide")

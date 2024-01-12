@@ -145,8 +145,8 @@
   flex-direction: row
 }
 
-.btn {
-  align-items: center;
+.btn-c {
+  align-items: left;
   background-color: #C92C4B;
   border: 2px solid #111;
   border-radius: 8px;
@@ -172,7 +172,7 @@
   left: 0%;
   }
   
-  .btn:after {
+  .btn-c:after {
   background-color: #111;
   border-radius: 8px;
   content: "";
@@ -187,21 +187,21 @@
   z-index: -1;
   }
   
-  .btn:hover:after {
+  .btn-c:hover:after {
   transform: translate(0, 0);
   }
   
-  .btn:active {
+  .btn-c:active {
   background-color: #C92C4B;
   outline: 0;
   }
   
-  .btn:hover {
+  .btn-c:hover {
   outline: 0;
   }
   
   @media (min-width: 768px) {
-  .btn {
+  .btn-c {
       padding: 0 40px;
   }
   }
