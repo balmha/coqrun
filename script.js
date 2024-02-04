@@ -93,31 +93,27 @@ function handleStart(event) {
 }
 
 async function handleConnect() {
-  if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-    lastTime = null
-    speedScale = 1
-    score = 0
-    setupclouds()
-    setupGround()
-    setupCock()
-    setupCactus()
-    if (await isConnected()){
-      connectScreenButton.classList.add("hide")
-      connectScreenElem.classList.add("hide")
-      startScreenElem.classList.remove("hide")
-      connectedScreenButton.classList.remove("hide")
-      jumpScreenElem.classList.remove("hide")
-      document.addEventListener("keydown", handleStart, { once: true })
-    }
-    else {
-      startScreenElem.classList.add("hide")
-      connectedScreenButton.classList.add("hide")
-      jumpScreenElem.classList.add("hide");
-      connectScreenElem.classList.remove("hide")
-      connectScreenButton.classList.remove("hide")
-    }
-  } else {
-    windows.alert("Metamask is not installed. Please install Metamask.");
+  lastTime = null
+  speedScale = 1
+  score = 0
+  setupclouds()
+  setupGround()
+  setupCock()
+  setupCactus()
+  if (await isConnected()){
+    connectScreenButton.classList.add("hide")
+    connectScreenElem.classList.add("hide")
+    startScreenElem.classList.remove("hide")
+    connectedScreenButton.classList.remove("hide")
+    jumpScreenElem.classList.remove("hide")
+    document.addEventListener("keydown", handleStart, { once: true })
+  }
+  else {
+    startScreenElem.classList.add("hide")
+    connectedScreenButton.classList.add("hide")
+    jumpScreenElem.classList.add("hide");
+    connectScreenElem.classList.remove("hide")
+    connectScreenButton.classList.remove("hide")
   }
 }
 

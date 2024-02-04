@@ -106,7 +106,12 @@ $('#sendModal').on('hidden.bs.modal', function (e) {
 //
 
 window.ethereum.on('connect', (connectInfo) => {
-  localStorage.globalChainId = connectInfo.chainId.toLowerCase();
+  if (window.ethereum.isConnected() === true){
+    localStorage.globalChainId = connectInfo.chainId.toLowerCase();
+  }
+  else {
+    windows,alert("Metamask is not installed. Please install Metamask.");
+  }
 })
 //document.querySelector('[data-score-screen]').addEventListener("click", getScore);
 
