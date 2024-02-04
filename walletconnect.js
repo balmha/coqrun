@@ -62,7 +62,7 @@ export function IsAvalancheSelected(){
 }
 
 export async function isConnected() {
-  const accounts = await ethereum.request({method: 'eth_accounts'});       
+  const accounts = await ethereum.request({method: 'eth_accounts'});
   if (accounts.length && IsAvalancheSelected()) {
     console.log(`You're connected to: ${accounts[0]}`);
     return true;
@@ -105,25 +105,25 @@ $('#sendModal').on('hidden.bs.modal', function (e) {
 })
 //
 
-window.ethereum.on('connect', (connectInfo) => {
-  if (window.ethereum.isConnected() === true){
+if (window.ethereum) {
+  window.ethereum.on('connect', (connectInfo) => {
     localStorage.globalChainId = connectInfo.chainId.toLowerCase();
-  }
-  else {
-    windows,alert("Metamask is not installed. Please install Metamask.");
-  }
-})
-//document.querySelector('[data-score-screen]').addEventListener("click", getScore);
-
-window.ethereum.on('chainChanged', (chainId) =>{
-  localStorage.globalChainId = chainId.toLowerCase();
-  console.log(localStorage.globalChainId)
-  window.location.reload();
-});
-
-window.ethereum.on('accountsChanged', function(accounts) {
-  window.location.reload()  
-});
+  })
+  //document.querySelector('[data-score-screen]').addEventListener("click", getScore);
+  
+  window.ethereum.on('chainChanged', (chainId) =>{
+    localStorage.globalChainId = chainId.toLowerCase();
+    console.log(localStorage.globalChainId)
+    window.location.reload();
+  });
+  
+  window.ethereum.on('accountsChanged', function(accounts) {
+    window.location.reload()  
+  });
+} else {
+  window.alert("Metamask not installed in your browser, please install the extension to proceed");
+  window.location = 'https://metamask.io/download/';
+}
 
 export async function getScore(score) {
   const accounts = await ethereum.request({method: 'eth_accounts'});
